@@ -7,17 +7,18 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 def return_teams_for_new_york():
-    # here we want to return all teams that are associated with New York City
-    pass
+    return session.query(City).filter(City.name == 'NY')[0].teams
 
 def return_players_for_la_dodgers():
-    # here we want to return all players that are associated with the LA dodgers
-    pass
+    return session.query(Team).filter(Team.name == 'LA Dodgers')[0].players
 
 def return_sorted_new_york_knicks():
+    return session.query(Player).filter(Player.team == 'NY Knicks')
+    # joined = Team.join(Team, Team.id == Player.team_id)
+    # return session.query(joined).filter(Team.name == 'NY Knicks').
+    # order_by(Player.number).players
     # here we want to return all the players on the New York Knicks
     # sorted in ascending (small -> big) order by their number
-    pass
 
 def return_youngest_basket_ball_player_in_new_york():
     # here we want to sort all the players on New York Knicks by age
